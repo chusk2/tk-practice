@@ -3,7 +3,7 @@ import tkinter as tk
 import sys
 import os
 
-os.chdir('/home/daniel/code/tk/pomodoro')
+os.chdir('/home/daniel/code/tk-practice/pomodoro')
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -11,9 +11,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
-SHORT_BREAK_MIN = 1
-LONG_BREAK_MIN = 1
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
+LONG_BREAK_MIN = 15
 TIME_SECONDS = WORK_MIN * 60
 
 cycles = 1
@@ -43,7 +43,6 @@ def counter(time_seconds):
         cycles += 1
         print(cycles)
         start_counter()
-        
     else:
         # repeat the function every 1 second
         # using current mins and seconds
@@ -56,22 +55,23 @@ def start_counter():
     if cycles % 2 != 0 and cycles != 7:
         cycle_time = WORK_MIN * 60
         canvas.itemconfig(timer_text, fill='white')
+        title.configure(text='Timer', fg=GREEN)
         counter(cycle_time)
 
     # take a break for 5 min
-    #TODO show label telling it's a break and duration
     elif cycles % 2 == 0:
         cycle_time = SHORT_BREAK_MIN * 60
         # number of working cycles: cycles // 2. Result must be integer
         tick_lbl.config(text = '\u2714' * (cycles // 2))
-        canvas.itemconfig(timer_text, fill='green')
+        canvas.itemconfig(timer_text, fill='green', )
+        title.configure(text=f'{SHORT_BREAK_MIN} min Break', fg='green')
         counter(cycle_time)
 
     # take a big break of 20 min
-    #TODO show label telling it's a break and duration
     elif cycles == 7:
         cycle_time = LONG_BREAK_MIN * 60
         canvas.itemconfig(timer_text, fill='blue')
+        title.configure(text=f'{LONG_BREAK_MIN} min Break', fg='blue')
         counter(cycle_time)
 
 window = tk.Tk()
@@ -104,6 +104,7 @@ timer_text = canvas.create_text(100, 140, text='00:00', fill='white',
     font=(FONT_NAME, 35, 'bold'))
 canvas.grid(row=1,column=1, pady=10)
 
+#TODO fix behaviour of buttons
 # buttons
 start_btn = tk.Button(window, text='Start',
     bg='white', fg='black', highlightthickness=0,
