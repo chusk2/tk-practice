@@ -124,7 +124,7 @@ generate_btn.grid(row=0, column=0, sticky='w', padx=5, pady=10)
 
 # clean password field button
 reset_pass_entry_btn = tk.Button(buttons_frame, text='Clean password',
-                                 command=lambda : password_SV.set(''))
+                                 command=lambda: password_SV.set(''))
 reset_pass_entry_btn.grid(row=0, column=1, sticky='w', padx=5, pady=10)
 
 # create the save button
@@ -136,7 +136,5 @@ save_btn.grid(row=1, column=0, sticky='we', padx=5, pady=10)
 clean_btn = tk.Button(buttons_frame, text='Clean form',
                       command=clean_form)
 clean_btn.grid(row=1, column=1, sticky='we', padx=5, pady=10)
-
-
 
 window.mainloop()
